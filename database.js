@@ -1,4 +1,4 @@
-const Sequelize = require("sequelize")
+/*const Sequelize = require("sequelize")
 
 const connection = new Sequelize('apidegames', 'root', '123456',{
     host: 'localhost',
@@ -7,3 +7,5 @@ const connection = new Sequelize('apidegames', 'root', '123456',{
 })
 
 module.exports = connection
+
+*/

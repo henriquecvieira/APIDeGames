@@ -1,5 +1,5 @@
-const Sequelize = require("sequelize")
-const connection = require("./database")
+//const Sequelize = require("sequelize")
+//const connection = require("./database")
 
 /*const Games = connection.define("games", {
     id:{
@@ -31,7 +31,7 @@ module.exports = Games
 
 
 
-const Game = connection.define('games', {
+/*const Game = connection.define('games', {
     
   id: { type: Sequelize.INTEGER, allowNull: false, primaryKey: true },
   title: { type: Sequelize.STRING, allowNull: false },
@@ -42,3 +42,4 @@ const Game = connection.define('games', {
 Game.sync({ force: false });
 
 module.exports = Game;
+*/

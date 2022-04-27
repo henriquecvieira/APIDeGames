@@ -1,13 +1,16 @@
+//initialize express
 const express = require("express")
 const app = express()
+//initialize body-parser
 const bodyParser = require("body-parser")
-const connection = require("./database");
+//database connection
+//const connection = require("./database");
 
+//configure body-parser at app
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-connection
-    .authenticate()
+
     
 
 let dataBase = {
@@ -33,10 +36,15 @@ let dataBase = {
     ]
 }
 
+
+//endpoints
+
 app.get("/games", (req, res) => {
     res.statusCode = 200
     res.json(dataBase.games)
 })
+
+
 
 app.get("/game/:id", (req, res) => {
     if(isNaN(req.params.id)){
@@ -51,6 +59,21 @@ app.get("/game/:id", (req, res) => {
             res.sendStatus(404)
         }     
     }
+})
+
+//cadastrar um game
+app.post("/game",  (req, res) => {
+    let {title, price, year} = req.body
+
+    dataBase.games.push({
+        id: 2505,
+        title,
+        price,
+        year
+    })
+
+    res.sendStatus(200)
+    
 })
 
 app.listen(45678, () => {
