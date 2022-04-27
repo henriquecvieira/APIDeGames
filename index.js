@@ -91,6 +91,35 @@ app.delete("/game/:id", (req, res) => {
 
 })
 
+app.put("/game/:id", (req, res) =>{
+    if(isNaN(req.params.id)){
+        res.sendStatus(400)    
+    }else{
+        let id = parseInt(req.params.id)
+        let game = dataBase.games.find(g => g.id == id)
+        if(game != undefined){
+            let {title, price, year} = req.body
+            
+            if (title != undefined){
+                game.title = title
+            }
+            if (price != undefined){
+                game.price = price
+            }
+            if (year != undefined){
+                game.year = year
+            }
+
+            res.sendStatus(200)
+            
+        }else{
+            res.sendStatus(404)
+        }     
+    }
+})
+   
+
+
 app.listen(45678, () => {
     console.log("API running!")
 })
