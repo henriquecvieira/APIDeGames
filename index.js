@@ -72,8 +72,23 @@ app.post("/game",  (req, res) => {
         year
     })
 
-    res.sendStatus(200)
-    
+    res.sendStatus(200)    
+})
+
+app.delete("/game/:id", (req, res) => {
+    if(isNaN(req.params.id)){
+        res.sendStatus(400)
+    }else{
+        let id = parseInt(req.params.id)
+        var index = dataBase.games.findIndex(g => g.id == id)
+    }
+        if(index == - 1){
+            res.sendStatus(404)
+        }else{
+            dataBase.games.splice(index,1)
+            res.sendStatus(200)
+        }
+
 })
 
 app.listen(45678, () => {
