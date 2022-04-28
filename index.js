@@ -6,6 +6,11 @@ const bodyParser = require("body-parser")
 //database connection
 //const connection = require("./database");
 
+//cors import
+const cors = require("cors")
+//configure cors on app
+app.use(cors())
+
 //configure body-parser at app
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
