@@ -7,6 +7,7 @@
     <title>Loja de Games</title>
     <hr />
     <h4>Lista de Games</h4>
+    <button type="button" onclick="location.reload()">Atualizar</button>
     <ul id="games"></ul>
     <hr />
     <h4>Novo Game</h4>
@@ -22,6 +23,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+ 
   <script>
     function createGame() {
       let titleInput = document.getElementById("title");
@@ -39,6 +41,7 @@
         .then((response) => {
           if (response.status == 200) {
             alert(" ♪ GAME CADASTRADO ♫ ↑");
+            location.reload()
           }
         })
         .catch((err) => {
@@ -56,6 +59,14 @@
 
         games.forEach((game) => {
           var item = document.createElement("li");
+
+          item.setAttribute("data-id", game.id)
+          item.setAttribute("data-title", game.title)
+          item.setAttribute("data-year", game.year)
+          item.setAttribute("data-price", game.price)
+
+
+
           item.innerHTML = game.id + " - " + game.title + " -$" + game.price;
           list.appendChild(item);
         });
