@@ -126,5 +126,5 @@ app.put("/game/:id", (req, res) =>{
 
 
 app.listen(45678, () => {
-    console.log("API running!")
+    console.log("API running at → http://localhost:45678/games")
 })
