@@ -32,8 +32,7 @@ const dataBase = connection
 
 //endpoints
 
-
-
+//listar de todos os games
 
 app.get("/games", async(req, res) => {
     
@@ -54,20 +53,71 @@ app.get("/games", async(req, res) => {
 
 
 
-app.get("/game/:id", (req, res) => {
-    if(isNaN(req.params.id)){
-        res.sendStatus(400)    
-    }else{
-       let id = parseInt(req.params.id)
-       let game = dataBase.games.find(g => g.id == id)
-       if(game != undefined){
-           res.statusCode = 200
-           res.json(game)
-        }else{
-            res.sendStatus(404)
-        }     
+
+
+//listar apenas um game
+
+app.get("/game/:_id", async (req, res) => {
+   
+    const { _id }  = req.params;
+    try{
+        const game =  await games.findOne({ _id });
+
+        if(!game)
+            return res.status(400).json({ error: "Game not found"});
+
+        return res.status(200).json({game: game})
+
+    }catch(err){
+        return res.status(400).json({error: "Ocorreu algum erro."})
     }
-})
+});
+// app.get("/game/:id", async(req, res) => {
+//     try {              
+        
+//         if(req.body?.id == false){
+//             res.status(404).json({error: "id is not defined!"})
+//             }else{
+
+//             }
+//         const results = await 
+//         games.findOne({  
+//             where: {
+//                 id: id
+//             }     
+//         })         
+//         res.status(200).json({succes: results}) 
+//     } catch (error) {
+//         if(isNaN(req.params.id)){
+//                     res.sendStatus(400)    
+//                 }else{
+//                    let id = parseInt(req.params.id)
+//                    let game = dataBase.game.find(g => g.id == id)
+//                    if(game != undefined){
+//                        res.statusCode = 200
+//                        res.json(game)
+//                     }else{
+//                         res.sendStatus(404)
+//                     }     
+//                 }
+//         res.status(400).json({error: error})
+//     }
+// })
+
+// app.get("/game/:id", (req, res) => {
+//     if(isNaN(req.params.id)){
+//         res.sendStatus(400)    
+//     }else{
+//        let id = parseInt(req.params.id)
+//        let game = dataBase.games.find(g => g.id == id)
+//        if(game != undefined){
+//            res.statusCode = 200
+//            res.json(game)
+//         }else{
+//             res.sendStatus(404)
+//         }     
+//     }
+// })
 
 //cadastrar um game
 app.post("/games", async (req, res) => {
@@ -92,7 +142,7 @@ app.post("/games", async (req, res) => {
     }
 })
  
-
+//deletar um game pelo id
 app.delete("/game/:id", (req, res) => {
     if(isNaN(req.params.id)){
         res.sendStatus(400)
@@ -109,6 +159,7 @@ app.delete("/game/:id", (req, res) => {
 
 })
 
+//altera um game pelo id
 app.put("/game/:id", (req, res) =>{
     if(isNaN(req.params.id)){
         res.sendStatus(400)    

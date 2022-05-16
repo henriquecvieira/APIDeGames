@@ -148,6 +148,13 @@
       .catch((error) => {
         console.log(error);
       });
+    
+    axios
+    .get("http://localhost:45678/game/:id")
+    .then(response => {
+        var game = document.getElementById("game")
+    })
+
   </script>
 
 </html>
