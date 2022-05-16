@@ -1,37 +1,37 @@
-//const Sequelize = require("sequelize")
-//const connection = require("./database")
+const Sequelize = require("sequelize")
+const connection = require("./database")
 
-/*const Games = connection.define("games", {
-    id:{
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true
-    },    
-    title:{
-        type: Sequelize.STRING,
-        allowNull: false,
-        primaryKey: true
-    },    
-    year:{
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true
-    },    
-    price:{
-        type: Sequelize.DECIMAL(5,2),
-        allowNull: false,
-        primaryKey: true
-    },    
-})
-
-
-
-module.exports = Games
-*/
+// const Games = connection.define("game", {
+//     id:{
+//         type: Sequelize.INTEGER,
+//         allowNull: false,
+//         primaryKey: true
+//     },    
+//     title:{
+//         type: Sequelize.STRING,
+//         allowNull: false,
+//         primaryKey: true
+//     },    
+//     year:{
+//         type: Sequelize.INTEGER,
+//         allowNull: false,
+//         primaryKey: true
+//     },    
+//     price:{
+//         type: Sequelize.DECIMAL(5,2),
+//         allowNull: false,
+//         primaryKey: true
+//     },    
+// })
 
 
 
-/*const Game = connection.define('games', {
+// module.exports = Games
+
+
+
+
+const games = connection.define('games', {
     
   id: { type: Sequelize.INTEGER, allowNull: false, primaryKey: true },
   title: { type: Sequelize.STRING, allowNull: false },
@@ -39,7 +39,6 @@ module.exports = Games
   price: { type: Sequelize.INTEGER, allowNull: false }
 });
 
-Game.sync({ force: false });
+games.sync({ force: false });
 
-module.exports = Game;
-*/
+module.exports = games;

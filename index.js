@@ -3,11 +3,13 @@ const express = require("express")
 const app = express()
 //initialize body-parser
 const bodyParser = require("body-parser")
-//database connection
-//const connection = require("./database");
+// database Connection = connection
+const connection = require("./database");
+const games = require("./Games")
 
 //cors import
-const cors = require("cors")
+const cors = require("cors");
+//const { Model } = require("sequelize/types");
 //configure cors on app
 app.use(cors())
 
@@ -16,38 +18,39 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 
+
+
+connection
+    .authenticate()
+    .then(() => {       
+        console.log("Sucessfull connection")       
+    }).catch((error) => {
+        console.log("error")
+    })    
     
-
-let dataBase = {
-    games: [
-        {
-            id: 23,
-            title: "Call of Duty MW",
-            year:2019,
-            price: 60
-        },
-        {
-            id: 65,
-            title: "Sea of Thieves",
-            year:2018,
-            price: 40
-        },
-        {
-            id: 2,
-            title: "Minecraft",
-            year:2012,
-            price: 80
-        }
-    ]
-}
-
+const dataBase = connection
 
 //endpoints
 
-app.get("/games", (req, res) => {
-    res.statusCode = 200
-    res.json(dataBase.games)
+
+
+
+app.get("/games", async(req, res) => {
+    
+    try {              
+        const results = await 
+        games.findAll({                             
+            order:[
+                [ 'id', 'DESC']
+            ],
+            limit: 4 
+        })         
+        res.status(200).json({succes: results}) 
+    } catch (error) {
+        res.status(400).json({error: error})
+    }
 })
+
 
 
 
@@ -67,18 +70,28 @@ app.get("/game/:id", (req, res) => {
 })
 
 //cadastrar um game
-app.post("/game",  (req, res) => {
-    let {title, price, year} = req.body
+app.post("/games", async (req, res) => {
+    try {
+        let {title, price, year} = req.body       
 
-    dataBase.games.push({
-        id: 2505,
-        title,
-        price,
-        year
-    })
-
-    res.sendStatus(200)    
+        if(req.body?.title == false && req.body?.price == false && req.body?.year == false){
+        res.status(404).json({error: "title or price or year is not defined!"})
+        }
+        const result = await games.create({   
+            id: Math.ceil((Math.random() * 10000) + 1000),  
+            title: title,
+            price: price,
+            year: year
+        }) 
+        
+        res.status(200).json({succes: result})
+        
+        
+    } catch (error) {
+        res.status(400).json({error: error})
+    }
 })
+ 
 
 app.delete("/game/:id", (req, res) => {
     if(isNaN(req.params.id)){
