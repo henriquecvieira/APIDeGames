@@ -48,7 +48,15 @@ const games = connection.define('games', {
   price: { type: Sequelize.INTEGER, allowNull: false }
 });
 ```
-
+### Autor
+---
+<a href="https://www.linkedin.com/in/henriquecarvalhovieira/">
+    
+  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/87788394?s=400&u=7f36505574f0bc15df5b88cc887a51f8e6406310&v=4" width="100px;" alt=""/>
+  <br />
+  <sub><b>Henrique Vieira</b></sub></a> <a href="https://blog.rocketseat.com.br/author/thiago//" title="Rocketseat">🚀</a>
+ 
+ 
  Feito com ❤️ por Henrique Vieira 
  
  👋🏽 Entre em contato!
