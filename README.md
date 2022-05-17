@@ -1,4 +1,3 @@
-<h1> em construção</h1>
 
 <!-- ## <img src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif" width="30px"> Olá seja bem-vindo(a)!</h2> -->
 ## <h2> Olá seja bem-vindo(a)!</h2>
