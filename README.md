@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> bae780660acf82993a1d59c1f96e5af39327de07
 <!-- ## <img src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif" width="30px"> Olá seja bem-vindo(a)!</h2> -->
 ## <h2> Olá seja bem-vindo(a)!</h2>
 
