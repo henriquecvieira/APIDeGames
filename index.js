@@ -33,7 +33,6 @@ const dataBase = connection
 //endpoints
 
 //listar de todos os games
-
 app.get("/games", async(req, res) => {
     
     try {              
@@ -50,18 +49,17 @@ app.get("/games", async(req, res) => {
     }
 })
 
-
-
-
-
-
 //listar apenas um game
-
-app.get("/game/:_id", async (req, res) => {
+app.get("/game/:id", async (req, res) => {
    
-    const { _id }  = req.params;
+    const  id   = req.params?.id;
     try{
-        const game =  await games.findOne({ _id });
+        const game =  await games.findOne({ 
+            where: 
+                {
+                    id: id
+                }  
+            });
 
         if(!game)
             return res.status(400).json({ error: "Game not found"});
@@ -72,52 +70,7 @@ app.get("/game/:_id", async (req, res) => {
         return res.status(400).json({error: "Ocorreu algum erro."})
     }
 });
-// app.get("/game/:id", async(req, res) => {
-//     try {              
-        
-//         if(req.body?.id == false){
-//             res.status(404).json({error: "id is not defined!"})
-//             }else{
 
-//             }
-//         const results = await 
-//         games.findOne({  
-//             where: {
-//                 id: id
-//             }     
-//         })         
-//         res.status(200).json({succes: results}) 
-//     } catch (error) {
-//         if(isNaN(req.params.id)){
-//                     res.sendStatus(400)    
-//                 }else{
-//                    let id = parseInt(req.params.id)
-//                    let game = dataBase.game.find(g => g.id == id)
-//                    if(game != undefined){
-//                        res.statusCode = 200
-//                        res.json(game)
-//                     }else{
-//                         res.sendStatus(404)
-//                     }     
-//                 }
-//         res.status(400).json({error: error})
-//     }
-// })
-
-// app.get("/game/:id", (req, res) => {
-//     if(isNaN(req.params.id)){
-//         res.sendStatus(400)    
-//     }else{
-//        let id = parseInt(req.params.id)
-//        let game = dataBase.games.find(g => g.id == id)
-//        if(game != undefined){
-//            res.statusCode = 200
-//            res.json(game)
-//         }else{
-//             res.sendStatus(404)
-//         }     
-//     }
-// })
 
 //cadastrar um game
 app.post("/games", async (req, res) => {
@@ -134,8 +87,7 @@ app.post("/games", async (req, res) => {
             year: year
         }) 
         
-        res.status(200).json({succes: result})
-        
+        res.status(200).json({succes: result})        
         
     } catch (error) {
         res.status(400).json({error: error})
@@ -143,43 +95,58 @@ app.post("/games", async (req, res) => {
 })
  
 //deletar um game pelo id
-app.delete("/game/:id", (req, res) => {
-    if(isNaN(req.params.id)){
+app.delete("/game/:id", async (req, res) => {
+     
+    if(isNaN(req.params?.id)){
         res.sendStatus(400)
     }else{
-        let id = parseInt(req.params.id)
-        var index = dataBase.games.findIndex(g => g.id == id)
+        const id = req.params?.id
+        const result = await games.destroy({
+            where: 
+            {
+                id: id
+            }            
+        })
+        res.status(200).json({succes: result})    
     }
-        if(index == - 1){
-            res.sendStatus(404)
-        }else{
-            dataBase.games.splice(index,1)
-            res.sendStatus(200)
-        }
-
 })
 
+
 //altera um game pelo id
-app.put("/game/:id", (req, res) =>{
-    if(isNaN(req.params.id)){
+app.put("/game/:id", async (req, res) =>{
+    if(isNaN(req.params?.id)){
         res.sendStatus(400)    
-    }else{
-        let id = parseInt(req.params.id)
-        let game = dataBase.games.find(g => g.id == id)
+    }else{        
+        let id = req.params?.id
+        let game = await games.findOne({
+            where: 
+                { 
+                   id: id
+                }
+        })
         if(game != undefined){
+            let updateGame = {}
             let {title, price, year} = req.body
             
             if (title != undefined){
-                game.title = title
+
+                updateGame.title = title
             }
             if (price != undefined){
-                game.price = price
+                updateGame.price = price
             }
             if (year != undefined){
-                game.year = year
+                updateGame.year = year
             }
+            console.log(updateGame)
+            let results = await games.update(
+                updateGame
+            ,{
+                where:{
+                id: id        
+            }})
 
-            res.sendStatus(200)
+            res.status(200).json({succes: results})
             
         }else{
             res.sendStatus(404)
