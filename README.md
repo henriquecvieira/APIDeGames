@@ -1,21 +1,21 @@
-
+<h1> em construção</h1>
 
 <!-- ## <img src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif" width="30px"> Olá seja bem-vindo(a)!</h2> -->
 ## <h2> Olá seja bem-vindo(a)!</h2>
 
 
 
-Sou <strong>Desevolvedor</strong> e <strong>Engenheiro Civil</strong> com Pós <strong> Graduação em Empreendedorismo e Novas Tecnologias</strong>.<br />
+Sou <strong>Desevolvedor</strong> e <strong>Engenheiro Civil</strong><br />
 
 Criei essa <strong>API Rest</strong> 
-rapidamente, gostaria de ter tido mais tempo para fazer alguns ajustes e criar mais testes unitários. Logo deixarei 100%</strong>.
+
 
   Utilizei: <strong>MySql, NodeJS e JavaScript.</strong>
   
-  <strong>O banco de dados esta hospedado no Google Cloud e a aplicação back-end esta no Heroku.</strong>
+  <strong>A aplicação back-end esta no Postman.</strong>
 
 
-  frameworks: <strong>bcryptjs, cors, dotenv, express, express-validator, Jest, jsonwebtoken e mysql2</strong>
+  frameworks: <strong>cors, express, mysql2</strong>
 
 ## Tecnologias & Ferramentas
 
