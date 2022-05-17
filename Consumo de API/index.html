@@ -112,14 +112,16 @@
         })
     }
 
+
+    
     axios
       .get("http://localhost:45678/games")
       .then(response => {
-        var games = response.data;
-        var list = document.getElementById("games");
+        const games = response.data;
+        const list = document.getElementById("games");
 
         games.forEach(game => {
-          var item = document.createElement("li");
+          const item = document.createElement("li");
 
           item.setAttribute("data-id", game.id);
           item.setAttribute("data-title", game.title);
@@ -128,13 +130,13 @@
 
           item.innerHTML = game.id + " - " + game.title + " - $" + game.price;
           
-          var deleteBtn = document.createElement("button");
+          const deleteBtn = document.createElement("button");
           deleteBtn.innerHTML = "Deletar";
           deleteBtn.addEventListener("click", function(){
             deleteGame(item)
           })
           
-          var editBtn = document.createElement("button");
+          const editBtn = document.createElement("button");
           deleteBtn.innerHTML = "Editar";
           editBtn.addEventListener("click", function(){
             loadForm(item)
@@ -152,7 +154,7 @@
     axios
     .get("http://localhost:45678/game/:id")
     .then(response => {
-        var game = document.getElementById("game")
+        const game = document.getElementById("game")
     })
 
   </script>
