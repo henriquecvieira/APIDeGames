@@ -152,21 +152,14 @@
         .then(response => {
           var games = response.data
           console.log(games)
-          // Array.from(games).forEach(game => {
           var item = document.createElement("li")
-
-
           item.setAttribute('data-id', games.game.id);
           item.setAttribute("data-title", games.game.title);
           item.setAttribute("data-year", games.game.year);
           item.setAttribute("data-price", games.game.price)
-
-          item.innerHTML += '<br>'
-          item.innerHTML = `Id: ${games.game.id} <br> Titulo: ${games.game.title}<br> Preço:${games.game.price}<br><br>`
-          alert(games.game.id)
-
+          games.innerHTML += '<br>'
+          game.innerHTML = `Id: ${games.game.id} <br> Titulo: ${games.game.title}<br> Preço:${games.game.price}<br><br>`
         })
-        // })
         .catch(error => {
           console.log(error)
         })
