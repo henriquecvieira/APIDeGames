@@ -111,9 +111,7 @@ app.put("/game/id", async (req, res) => {
                     updateGame.year = year
                 }
                 await game.update(updateGame, { where: { id: id } })
-
                 let results = await game.findOne({ where: { id: id } })
-
                 res.status(200).json(results)
 
             } else {

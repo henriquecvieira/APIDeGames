@@ -11,22 +11,34 @@
   <button type="button" onclick="location.reload();">Atualizar</button>
   <ul id="games"></ul>
   <hr />
-  <div id="gameById">
-    <h4>buscar game por ID</h4>
-    <button type="button" onclick="findById()">Pesquisar</button>
-    <ul id="game"></ul>
-  </div>
-  <input type="number" id="gameId" placeholder="número ID"><br>
-  <hr />
   <main>
+    <div>
+      <h2>Cria Usuário</h2>
+      <section>
+        <input type="text" name="createEmail" id="createEmail" placeholder="@email.com"><br>
+        <input type="password" name="password1" id="password1" placeholder="**********"><br>
+        <input type="password" name="password2" id="password2" placeholder="**********"><br><br>
+        <button onclick="signUp()">Criar</button>
+      </section>
+    </div>
+    <br>
+    <hr>
     <h2>Login</h2>
     <section>
       <input type="text" name="email" id="email" placeholder="@email.com"><br>
-      <input type="text" name="password" id="password" placeholder="**********">
+      <input type="password" name="password" id="password" placeholder="**********"><br><br>
       <button onclick="login()">Entrar</button>
     </section>
     <br>
     <hr>
+    <div id="gameById">
+      <h4>buscar game por ID</h4>
+      <button type="button" onclick="findById()">Pesquisar</button>
+      <ul id="game"></ul>
+      <input type="number" id="gameId" placeholder="número ID"><br>
+      <br>
+      <hr />
+    </div>
     <section>
       <h4>Novo Game</h4>
       <input type="text" name="title" id="title" placeholder="Título" /> <br />
@@ -145,7 +157,6 @@
 
 
     function findById() {
-
       var id = document.getElementById("gameId").value
       axios
         .get("http://localhost:45678/game" + id)
@@ -153,17 +164,44 @@
           var games = response.data
           console.log(games)
           var item = document.createElement("li")
-          item.setAttribute('data-id', games.game.id);
-          item.setAttribute("data-title", games.game.title);
-          item.setAttribute("data-year", games.game.year);
-          item.setAttribute("data-price", games.game.price)
-          games.innerHTML += '<br>'
           game.innerHTML = `Id: ${games.game.id} <br> Titulo: ${games.game.title}<br> Preço:${games.game.price}<br><br>`
+          location.reload();
         })
         .catch(error => {
           console.log(error)
         })
     }
+
+    function criarBtn() {
+      var criarButton = document.createElement("button");
+      criarButton.innerHTML = "Criar";
+      criarButton.addEventListener("click", function () { signUp(item) })
+      alert(" usuário cadastrado ↑")
+      location.reload();
+    }
+
+    function signUp() {
+      var email = document.getElementById("createEmail");
+      var password = document.getElementById("password1");
+      var confirmPassword = document.getElementById("password2")
+      var user = { email: email.value, password: password1.value, password2: password2.value }
+
+      axios
+        .post("http://localhost:45678/user")
+        .then((response) => {
+          const userTeste = respose.data
+          console.log(userTeste)
+          debugger
+          if (response.status == 200) {
+            criarBtn()
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+
+
 
 
   </script>
