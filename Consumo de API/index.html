@@ -50,7 +50,7 @@
     <hr>
     <section>
       <h4>Editar Game</h4>
-      <input type="text" name="idEdit" id="idEdit" placeholder="ID" readonly /> <br />
+      <input type="text" name="idEdit" id="idEdit" placeholder="ID" /> <br />
       <input type="text" name="titleEdit" id="title" placeholder="Título" /> <br />
       <input type="number" name="yearEdit" id="year" placeholder="Ano" /> <br />
       <input type="number" name="priceEdit" id="price" placeholder="Preço" /> <br />
@@ -64,7 +64,6 @@
 
   <script src="sweetAlert2.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
   <script>
     function createGame() {
       var titleInput = document.getElementById("title");
@@ -201,12 +200,8 @@
         })
     }
 
-
-
-
   </script>
+
 </body>
-
-
 
 </html>

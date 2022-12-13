@@ -22,9 +22,8 @@ connection
         console.log("error")
     })
 
-//listar de todos os games
+// listar de todos os games
 app.get("/games", async (req, res) => {
-
     try {
         const results = await games.findAll({ order: [['id', 'DESC']], limit: 2 })
         if (results) {
@@ -36,7 +35,7 @@ app.get("/games", async (req, res) => {
 })
 
 //listar apenas um game
-app.get("/game:id", async (req, res) => {
+app.get("/game/:id", async (req, res) => {
     console.log(req.params)
     const id = req.params?.id;
 
@@ -89,7 +88,7 @@ app.delete("/game/:id", async (req, res) => {
 
 
 //altera um game pelo id
-app.put("/game/id", async (req, res) => {
+app.put("/game/:id", async (req, res) => {
     try {
         if (isNaN(req.params?.id)) {
             res.sendStatus(400)
@@ -111,7 +110,7 @@ app.put("/game/id", async (req, res) => {
                     updateGame.year = year
                 }
                 await game.update(updateGame, { where: { id: id } })
-                let results = await game.findOne({ where: { id: id } })
+                let results = await games.findOne({ where: { id: id } })
                 res.status(200).json(results)
 
             } else {
